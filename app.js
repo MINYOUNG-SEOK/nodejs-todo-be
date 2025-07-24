@@ -9,7 +9,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/api", indexRouter);
 
-const mongoURI = `mongodb://localhost:27017/todo-list`;
+const mongoURI =
+  process.env.MONGODB_URI_PROD || "mongodb://localhost:27017/todo-list";
 
 mongoose
   .connect(mongoURI)
@@ -20,6 +21,7 @@ mongoose
     console.log("DB connection fail", err);
   });
 
-app.listen(4000, () => {
-  console.log("server on 4000");
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log("server on", PORT);
 });
