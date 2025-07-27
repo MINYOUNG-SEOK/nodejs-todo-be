@@ -38,4 +38,18 @@ userController.loginWithEmail = async (req, res) => {
   }
 };
 
+userController.checkEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(200).json({ exists: true });
+    } else {
+      return res.status(200).json({ exists: false });
+    }
+  } catch (error) {
+    res.status(400).json({ status: "실패", message: error.message });
+  }
+};
+
 module.exports = userController;
