@@ -52,4 +52,17 @@ userController.checkEmail = async (req, res) => {
   }
 };
 
+userController.getUser = async (req, res) => {
+  try {
+    const { userId } = req;
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("can not find user");
+    }
+    res.status(200).json({ status: "성공", user });
+  } catch (error) {
+    res.status(400).json({ status: "실패", message: error.message });
+  }
+};
+
 module.exports = userController;
