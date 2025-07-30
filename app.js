@@ -4,6 +4,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const indexRouter = require("./routes/index");
 
+require("./model/User");
+require("./model/Task");
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
